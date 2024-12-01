@@ -1,3 +1,5 @@
+-- Congrats. You found a public lib. Want my script? Not here 🤓
+
 local library = {}
 
 local TweenService = game:GetService("TweenService")
@@ -76,6 +78,13 @@ function library:set_draggable(gui)
 end
 
 function library.new(library_title, cfg_location)
+    local old_ui = game:GetService("CoreGui"):FindFirstChild("Nitrous")
+
+    if old_ui then
+        old_ui:Destroy()
+        task.wait(1)
+    end
+    
     local menu = {}
     menu.values = {}
     menu.on_load_cfg = library.signal.new("on_load_cfg")
@@ -144,6 +153,7 @@ function library.new(library_title, cfg_location)
 		syn.protect_gui(ScreenGui)
 	end
 
+    ScreenGui.Name = "Nitrous"
 	ScreenGui.Parent = game:GetService("CoreGui")
 
     function menu.IsOpen()
