@@ -76,6 +76,13 @@ function library:set_draggable(gui)
 end
 
 function library.new(library_title, cfg_location)
+	
+	local old_ui = game:GetService("CoreGui"):FindFirstChild(library_title)
+	if old_ui then
+		old_ui:Destroy()
+		task.wait(1)
+	end
+	
 	local menu = {}
 	menu.values = {}
 	menu.on_load_cfg = library.signal.new("on_load_cfg")
@@ -136,33 +143,14 @@ function library.new(library_title, cfg_location)
 	local ScreenGui = library:create("ScreenGui", {
 		ResetOnSpawn = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Global,
-		Name = "unknown",
+		Name = library_title,
 		IgnoreGuiInset = true,
 	})
 
 	if syn then
 		syn.protect_gui(ScreenGui)
 	end
-
-	local Cursor = library:create("ImageLabel", {
-		Name = "Cursor",
-		BackgroundTransparency = 1,
-		Size = UDim2.new(0, 17, 0, 17),
-		Image = "rbxassetid://7205257578",
-		ZIndex = 6969,
-	}, ScreenGui)
-
-	rs.RenderStepped:Connect(function()
-		Cursor.Position = UDim2.new(0, mouse.X, 0, mouse.Y + 36)
-	end)
 	
-	local old_ui = game:GetService("CoreGui"):FindFirstChild(library_title)
-	if old_ui then
-		old_ui:Destroy()
-		task.wait(1)
-	end
-	
-	ScreenGui.Name = library_title
 	ScreenGui.Parent = game:GetService("CoreGui")
 
 	function menu.IsOpen()
