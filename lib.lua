@@ -1159,13 +1159,9 @@ function library.new(library_title, cfg_location)
 						}, DropdownScroll)
 
 						local options_num = #data.options
-						if options_num >= 4 then
-							DropdownScroll.Size = UDim2.new(0, 260, 0, 80)
-							for i = 1, options_num do
-								DropdownScroll.CanvasSize = DropdownScroll.CanvasSize + UDim2.new(0, 0, 0, 20)
-							end
-						else
-							DropdownScroll.Size = UDim2.new(0, 260, 0, 20 * options_num)
+						DropdownScroll.Size = UDim2.new(0, 260, 0, 20 * options_num)
+						for i = 1, options_num do
+							DropdownScroll.CanvasSize = DropdownScroll.CanvasSize + UDim2.new(0, 0, 0, 20)
 						end
 
 						local in_drop = false
@@ -1289,16 +1285,11 @@ function library.new(library_title, cfg_location)
 							data.options = new_data.options
 							local options_num = #data.options
 							DropdownScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-						
-							if options_num >= 4 then
-								DropdownScroll.Size = UDim2.new(0, 260, 0, 80)
-								for i = 1, options_num do
-									DropdownScroll.CanvasSize = DropdownScroll.CanvasSize + UDim2.new(0, 0, 0, 20)
-								end
-							else
-								DropdownScroll.Size = UDim2.new(0, 260, 0, 20 * options_num)
+							DropdownScroll.Size = UDim2.new(0, 260, 0, 20 * options_num)
+							for i = 1, options_num do
+								DropdownScroll.CanvasSize = DropdownScroll.CanvasSize + UDim2.new(0, 0, 0, 20)
 							end
-						
+
 							local dropdown_is_first = true
 							for _, v in ipairs(data.options) do
 								local Button = library:create("TextButton", {
