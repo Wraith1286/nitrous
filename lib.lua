@@ -80,6 +80,7 @@ function library.new(library_title, cfg_location)
 	local old_ui = game:GetService("CoreGui"):FindFirstChild(library_title)
 	if old_ui then
 		old_ui:Destroy()
+		old_ui = nil
 		task.wait(1)
 	end
 	
